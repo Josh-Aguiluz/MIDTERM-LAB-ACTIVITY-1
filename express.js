@@ -3,6 +3,9 @@ import path from 'path';
 
 const __dirname = import.meta.dirname;
 const app = express();
+
+// MIDDLEWARE
+const urlEncodeParser = bodyParser.urlencoded({extended : false});
 app.use(express.static('public'));
 
 // ---- PAGE ROUTES (To show the HTML files) ----
@@ -81,7 +84,7 @@ app.get('/getStudent', (req, res) => {
 });
 
 // Handles the Admin Form submission
-app.get('/postAdmin', (req, res) => {
+app.post('/postAdmin', (req, res) => {
     const response = {
         adminID: req.query.adminID,
         firstName: req.query.firstName,
