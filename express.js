@@ -81,7 +81,7 @@ app.get('/getStudent', (req, res) => {
 });
 
 // Handles the Admin Form submission
-app.get('/getAdmin', (req, res) => {
+app.get('/postAdmin', (req, res) => {
     const response = {
         adminID: req.query.adminID,
         firstName: req.query.firstName,
