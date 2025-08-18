@@ -70,7 +70,7 @@ form input[type="text"] {
 
 form input[type="text"]:focus {
     outline: none;
-    border-color: #4a6d8c; /* Matches the new blue button color */
+    border-color: #4a6d8c;
     box-shadow: 0 0 0 3px rgba(74, 109, 140, 0.2);
 }
 
@@ -84,7 +84,7 @@ form input[type="submit"] {
     margin-top: 20px;
     padding: 15px;
     text-decoration: none;
-    background: #4a6d8c; /* Professional blue for all buttons */
+    background: #4a6d8c;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -99,7 +99,7 @@ form input[type="submit"] {
 /* Shared hover effect for all buttons */
 .links a:hover,
 form input[type="submit"]:hover {
-    background: #3a5770; /* Darker blue for all buttons on hover */
+    background: #3a5770;
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
@@ -108,14 +108,14 @@ form input[type="submit"]:hover {
 /* ---- Back Link ---- */
 /* Improved design for the "Go Back to Home" link */
 .back-link {
-    display: inline-block; /* Allows it to not take full width */
+    display: inline-block;
     margin-top: 30px;
     padding: 8px 15px;
     font-size: 0.9em;
     font-weight: 600;
     color: #555;
     text-decoration: none;
-    border-radius: 20px; /* Pill shape */
+    border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
@@ -123,4 +123,18 @@ form input[type="submit"]:hover {
 .back-link:hover {
     background-color: rgba(0, 0, 0, 0.1);
     color: #000;
+}
+
+/* para mashow container */
+.uploaded-image-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.small-image {
+    max-width: 150px;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

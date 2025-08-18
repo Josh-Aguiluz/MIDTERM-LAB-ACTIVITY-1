@@ -15,7 +15,8 @@ const app = express();
 // Set up middleware to parse request bodies and serve static files
 app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data from forms
 app.use(express.json()); // Parses JSON data
-app.use(express.static('public')); // Serves static files from the 'public' directory
+app.use(express.static('public')); 
+app.use(express.static('uploads')); 
 
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
@@ -55,19 +56,31 @@ app.get('/adminForm', (req, res) => {
 });
 
 app.get('/uploadForm', (req, res) => {
-
     res.sendFile(path.join(__dirname, 'uploadForm.html'));
 });
 
 
 // ---- API ROUTES (To handle form submissions) ----
 
-
+// response page
 const createSuccessPage = (title, data) => {
     let dataHtml = '';
+    let uploadedFileImage = '';
+
     for (const key in data) {
-        dataHtml += `<p><strong>${key}:</strong> ${data[key]}</p>`;
+        if (key === 'file' && data[key] !== 'No file uploaded') {
+ 
+            if (data[key].match(/\.(jpeg|jpg|png|gif|avif)$/i)) {
+   
+                uploadedFileImage = `<div class="uploaded-image-container"><p><strong>Uploaded File:</strong></p><img src="/${data[key]}" alt="Uploaded File" class="small-image"></div>`;
+            } else {
+                dataHtml += `<p><strong>Uploaded File:</strong> ${data[key]}</p>`;
+            }
+        } else {
+            dataHtml += `<p><strong>${key}:</strong> ${data[key]}</p>`;
+        }
     }
+
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -83,6 +96,7 @@ const createSuccessPage = (title, data) => {
                 <div style="text-align: left; display: inline-block;">
                     ${dataHtml}
                 </div>
+                ${uploadedFileImage}
                 <div class="links">
                     <a href="/">Go Back to Home</a>
                 </div>
@@ -118,13 +132,12 @@ app.get('/getStudent', (req, res) => {
 
 
 app.post('/postAdmin', upload, (req, res) => {
-    // Multer populates req.body with form fields and req.file with file info
     const response = {
         adminID: req.body.adminID,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         department: req.body.department,
-        file: req.file.originalname, // Access the uploaded file name
+        file: req.file ? req.file.originalname : 'No file uploaded',
     };
     console.log("Admin Data: ", response);
     const htmlResponse = createSuccessPage('Admin Data Received!', response);
