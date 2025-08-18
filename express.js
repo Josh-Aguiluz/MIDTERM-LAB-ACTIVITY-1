@@ -1,12 +1,14 @@
 import express from 'express';
 import path from 'path';
-
 const __dirname = import.meta.dirname;
 const app = express();
 
 // MIDDLEWARE
-const urlEncodeParser = bodyParser.urlencoded({extended : false});
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false })); 
+app.use(express.json()); // Parses JSON data for POST requests
+
+// HELLO WORLD
 
 // ---- PAGE ROUTES (To show the HTML files) ----
 app.get('/', (req, res) => {
@@ -24,7 +26,6 @@ app.get('/studentForm', (req, res) => {
 app.get('/adminForm', (req, res) => {
     res.sendFile(__dirname + '/pages/adminForm.html');
 });
-
 
 // ---- API ROUTES (To handle form submissions) ----
 
@@ -83,13 +84,13 @@ app.get('/getStudent', (req, res) => {
     res.send(htmlResponse);
 });
 
-// Handles the Admin Form submission
+// Handles the Admin Form submission (using req.body for POST)
 app.post('/postAdmin', (req, res) => {
     const response = {
-        adminID: req.query.adminID,
-        firstName: req.query.firstName,
-        lastName: req.query.lastName,
-        department: req.query.department,
+        adminID: req.body.adminID, // Changed to req.body
+        firstName: req.body.firstName, // Changed to req.body
+        lastName: req.body.lastName, // Changed to req.body
+        department: req.body.department, // Changed to req.body
     };
     console.log("Admin Data: ", response);
     const htmlResponse = createSuccessPage('Admin Data Received!', response);
