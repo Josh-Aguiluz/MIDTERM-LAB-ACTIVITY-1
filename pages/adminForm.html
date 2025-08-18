@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Admin Form</h1>
-        <form action="/postAdmin" method="POST">
+        <form action="/postAdmin" enctype="multipart/form-data" method="POST">
             <label for="adminID">Admin ID:</label>
             <input type="text" id="adminID" name="adminID" />
             <br/>
@@ -21,7 +21,11 @@
             <br/>
             <label for="department">Department:</label>
             <input type="text" id="department" name="department" />
-            <br/>
+            <br/><br/>
+            <label for="file">Select a File to Upload:</label>
+            <br />
+            <input type="file" name="file" id="file" required>
+            <br /><br />
             <input type="submit" value="Submit Admin Data" />
         </form>
         <a href="/" class="back-link">Go Back to Home</a>
