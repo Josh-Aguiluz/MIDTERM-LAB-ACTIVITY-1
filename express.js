@@ -21,7 +21,6 @@ app.use(express.static('uploads'));
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        // The 'uploads' folder must exist in your project root
         callback(null, 'uploads/');
     },
     filename: (req, file, callback) => {
@@ -33,7 +32,7 @@ const upload = multer({ storage: storage }).single('file');
 
 // ---- PAGE ROUTES (To show the HTML files) ----
 
-// Main entry point for the application, serves the home page
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'pages', 'home.html'));
 });
